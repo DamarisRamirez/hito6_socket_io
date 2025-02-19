@@ -1,0 +1,38 @@
+[
+  {
+    "id": "11.111.111-1",
+    "name": "Juan Pérez",
+    "age": 45,
+    "diagnostic": "Hipertensión arterial"
+  },
+  {
+    "id": "11.111.111-2",
+    "name": "María López",
+    "age": 32,
+    "diagnostic": "Diabetes tipo 2"
+  },
+  {
+    "id": "11.111.111-3",
+    "name": "Carlos Ramírez",
+    "age": 28,
+    "diagnostic": "Alergia estacional"
+  },
+  {
+    "id": "11.111.111-4",
+    "name": "Ana Torres",
+    "age": 60,
+    "diagnostic": "Artritis reumatoide"
+  },
+  {
+    "id": "11.111.111-5",
+    "name": "Luis Fernández",
+    "age": 50,
+    "diagnostic": "Insuficiencia cardíaca"
+  },
+  {
+    "id": "11.111.111.6",
+    "name": "Luis Ramírez",
+    "age": 50,
+    "diagnostic": "TEP"
+  }
+]

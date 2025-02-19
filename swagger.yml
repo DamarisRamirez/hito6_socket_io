@@ -1,0 +1,349 @@
+openapi: "3.0.0"
+info:
+  title: "API Example"
+  version: "1.0.0"
+
+paths:
+  /api/v1/auth/login:
+    post:
+      tags:
+        - "auth"
+      summary: "Login"
+      description: "Endpoint to log in a user using email and password."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "user@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "mypassword123"
+      responses:
+        200:
+          description: "User successfully logged in."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: "JWT token for the authenticated user."
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        400:
+          description: "Bad Request - Invalid input or missing fields."
+        500:
+          description: "Internal Server Error."
+
+  /api/v1/auth/register:
+    post:
+      tags:
+        - "auth"
+      summary: "Register"
+      description: "Endpoint to register a new user using email and password."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "newuser@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "securepassword456"
+      responses:
+        201:
+          description: "User successfully registered."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: "JWT token for the newly registered user."
+                    example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        400:
+          description: "Bad Request - Invalid input or user already exists."
+        500:
+          description: "Internal Server Error."
+
+  /api/v1/users:
+    get:
+      tags:
+        - "users"
+      summary: "Get all users"
+      description: "Endpoint to retrieve a list of all users. Requires authentication."
+      responses:
+        200:
+          description: "List of users retrieved successfully."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: "Unique identifier for the user."
+                      example: "123"
+                    email:
+                      type: string
+                      format: email
+                      description: "Email address of the user."
+                      example: "user@example.com"
+        401:
+          description: "Unauthorized - Invalid or missing token."
+        500:
+          description: "Internal Server Error."
+
+  /api/v1/users/createUser:
+    post:
+      tags:
+        - "users"
+      summary: "Create a new user"
+      description: "Endpoint to create a new user with email and password."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                  example: "newuser@example.com"
+                password:
+                  type: string
+                  format: password
+                  example: "securepassword456"
+      responses:
+        201:
+          description: "User successfully created."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: "Unique identifier for the newly created user."
+                    example: "456"
+                  email:
+                    type: string
+                    format: email
+                    description: "Email address of the newly created user."
+                    example: "newuser@example.com"
+        400:
+          description: "Bad Request - Invalid input or user already exists."
+        500:
+          description: "Internal Server Error."
+
+  /api/v1/patients:
+    get:
+      tags:
+        - "patients"
+      summary: "Get all patients"
+      description: "Endpoint to retrieve a list of all patients. Requires authentication."
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "List of patients retrieved successfully."
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: "Unique identifier for the patient."
+                      example: "11.111.111-1"
+                    name:
+                      type: string
+                      description: "Name of the patient."
+                      example: "John Doe"
+                    age:
+                      type: integer
+                      description: "Age of the patient."
+                      example: 35
+                    diagnostic:
+                      type: string
+                      description: "Patient's diagnostic information."
+                      example: "Flu"
+        401:
+          description: "Unauthorized - Invalid or missing token."
+        500:
+          description: "Internal Server Error."
+
+  /api/v1/patients/createPatient:
+    post:
+      tags:
+        - "patients"
+      summary: "Create a new patient"
+      description: "Endpoint to create a new patient record."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: "Unique identifier for the patient."
+                  example: "11.111.111-1"
+                name:
+                  type: string
+                  description: "Name of the patient."
+                  example: "Jane Doe"
+                age:
+                  type: integer
+                  description: "Age of the patient."
+                  example: 29
+                diagnostic:
+                  type: string
+                  description: "Patient's diagnostic information."
+                  example: "Allergy"
+      responses:
+        201:
+          description: "Patient record successfully created."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: "Unique identifier for the patient."
+                    example: "11.111.111-1"
+                  name:
+                    type: string
+                    description: "Name of the patient."
+                    example: "Jane Doe"
+        400:
+          description: "Bad Request - Invalid input or patient already exists."
+        500:
+          description: "Internal Server Error."
+
+  /api/v1/patients/{id}:
+    get:
+      tags:
+        - "patients"
+      summary: "Get patient by ID"
+      description: "Endpoint to retrieve a specific patient by their unique identifier."
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: "Unique identifier for the patient."
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "Patient record retrieved successfully."
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    description: "Unique identifier for the patient."
+                    example: "11.111.111-1"
+                  name:
+                    type: string
+                    description: "Name of the patient."
+                    example: "John Doe"
+                  age:
+                    type: integer
+                    description: "Age of the patient."
+                    example: 35
+                  diagnostic:
+                    type: string
+                    description: "Patient's diagnostic information."
+                    example: "Flu"
+        401:
+          description: "Unauthorized - Invalid or missing token."
+        404:
+          description: "Patient not found."
+        500:
+          description: "Internal Server Error."
+
+  /api/v1/patients/updatePatient:
+    put:
+      tags:
+        - "patients"
+      summary: "Update patient"
+      description: "Endpoint to update patient details."
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: "Unique identifier for the patient."
+                  example: "11.111.111-1"
+                name:
+                  type: string
+                  description: "Name of the patient."
+                  example: "John Doe"
+                age:
+                    type: integer
+                    description: "Age of the patient."
+                    example: 35
+                diagnostic:
+                    type: string
+                    description: "Patient's diagnostic information."
+                    example: "Flu"
+      responses:
+        200:
+          description: "Patient record updated successfully."
+        400:
+          description: "Bad Request - Invalid input or patient not found."
+        500:
+          description: "Internal Server Error."
+  /api/v1/patients/deletePatient:
+    delete:
+      tags:
+        - "patients"
+      summary: "Delete patient"
+      description: "Endpoint to delete a specific patient by their unique identifier."
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+            example: "11.111.111-1" 
+          description: "Unique identifier for the patient."
+      security:
+        - bearerAuth: []
+      responses:
+        200:
+          description: "Patient record deleted successfully."
+        400:
+          description: "Bad Request - Invalid input or patient not found."
+        500:
+          description: "Internal server error. Something went wrong while processing the request."
