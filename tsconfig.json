@@ -6,7 +6,8 @@
       "strict": true,
       "outDir": "./dist",
       "moduleDetection": "force",
-      "module": "Preserve",
+      "moduleResolution": "node",  // Agregar esta línea para evitar el error
+      "module": "commonjs",
       "resolveJsonModule": true,
       "allowJs": true,
       "esModuleInterop": true,
