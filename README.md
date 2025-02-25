@@ -7,6 +7,16 @@ Modificaciones realizadas:
 - Carpeta src: index.ts y app.ts
 - Se crea carpeta public para manejo de front 
 
+*No se utiliza login con JWT
+
+**Datos de prueba para .env :
+
+API_KEY=kj17827187
+PORT=3000
+JWT_SECRET=H48s8J2LAaO9UJ4w39NK522weLK2
+
+CONNECT_DB="postgresql://postgres:root@localhost:5434/dbclinic"
+
 -----------------------------------------------------------------------------
 
 
