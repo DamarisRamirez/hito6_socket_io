@@ -1,3 +1,19 @@
+-----------------------------------------------------------------------------
+HITO 6
+
+Para probar la implementación de Socket io, abrir en navegador http://localhost:3000
+
+Modificaciones realizadas:
+- Carpeta src: index.ts y app.ts
+- Se crea carpeta public para manejo de front 
+
+-----------------------------------------------------------------------------
+
+
+
+HITOS ANTERIORES 
+
+
 Las rutas del siguiente proyecto han sido probadas con Thunder Client
 
 1) Creación de usuario:
@@ -21,3 +37,4 @@ Carpeta config: Configuración conexión a BD con Sequelize
 Carpeta models: Se dejan por separado los squemas de usuario y paciente en archivos 'user.ts' y patient.ts. Se modifican los modelos para realizar consultas a la BD por medio de métodos de sequelize
 
 25-01-2025 Único cambio: palabra secreta para JWT
+

@@ -34,10 +34,19 @@ socket.on("message", (message) => {
 
 const room = (room) => {
   roomSelected = room;
-  // socket.emit("joinRoom", room);
 
   $messages.innerHTML = "";
 
-  // unirse a la sala room1
+  // unirse a la sala 
   socket.emit("joinRoom", roomSelected);
+};
+
+// Salir de la sala
+const leaveRoom = () => {
+  socket.emit("leaveRoom", roomSelected);
+  roomSelected = "";
+  alert("Has abandonado la sala");
+
+  // Limpiar mensajes
+  $messages.innerHTML = "";
 };
